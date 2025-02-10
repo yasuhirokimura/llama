@@ -26,6 +26,7 @@ all: lisp
 help:
 	$(info make all      -- Build lisp)
 	$(info make lisp     -- Build lisp)
+	$(info make install  -- Install source, byte-code and autoloads)
 	$(info make redo     -- Build lisp from scratch)
 	$(info make test     -- Run tests)
 	$(info make clean    -- Remove built files)
@@ -34,6 +35,9 @@ help:
 redo: clean lisp
 
 lisp: $(ELCS) autoloads check-declare
+
+install: lisp
+	install -m 644 -p $(ELS) $(ELCS) $(PREFIX)/share/emacs/site-lisp
 
 autoloads: $(PKG)-autoloads.el
 
