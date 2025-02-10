@@ -26,6 +26,7 @@ all: lisp
 help:
 	$(info make all          - generate byte-code and autoloads)
 	$(info make lisp         - generate byte-code and autoloads)
+	$(info make install      - install source, byte-code and autoloads)
 	$(info make redo         - re-generate byte-code and autoloads)
 	$(info make test         - run tests)
 	$(info make clean        - remove generated files)
@@ -34,6 +35,9 @@ help:
 redo: clean lisp
 
 lisp: $(ELCS) loaddefs check-declare
+
+install: lisp
+	install -m 644 -p $(ELS) $(ELCS) $(PREFIX)/share/emacs/site-lisp
 
 loaddefs: $(PKG)-autoloads.el
 
